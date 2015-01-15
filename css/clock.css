@@ -1,0 +1,21 @@
+h1 {
+   text-align:center;
+   color:#0000CD;
+}
+
+body {
+   text-align:center;
+   background:linear-gradient(#A3D1FF, #FFFFFF);
+   background-repeat: no-repeat;
+}
+
+p {
+   font-family:Verdana, Geneva, sans-serif;
+   color:#4169E1;
+}
+
+.bigBoldText {
+   font-weight:bold;
+   font-size:40px;
+   color:#4169E1;
+}
