@@ -9,6 +9,8 @@ var getTime = function() {
       min= "0" + min;
    if (sec <= 9) 
       sec = "0" + sec;
+   if (hr > 12)
+      hr -= 12;
 
    document.getElementById("myDate").innerHTML = hr + ":" + min + ":" + sec + ampm;
    window.setTimeout(getTime,1000);
