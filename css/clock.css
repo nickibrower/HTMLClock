@@ -5,8 +5,7 @@ h1 {
 
 body {
    text-align:center;
-   background:linear-gradient(#A3D1FF, #FFFFFF);
-   background-repeat: no-repeat;
+   background:#A3D1FF;
 }
 
 p {
@@ -14,8 +13,36 @@ p {
    color:#4169E1;
 }
 
+div {
+   font-family:Verdana, Geneva, sans-serif;
+   color:#4169E1;
+}
+
 .bigBoldText {
    font-weight:bold;
-   font-size:40px;
+   font-size:80px;
    color:#4169E1;
+}
+
+.cold {
+   background-color:#95A5A6;
+}
+
+.chilly {
+   background-color:#1ABC9C;
+}
+
+
+.nice {
+   background-color:#2980B9;
+}
+
+
+.warm {
+   background-color:#E67E22;
+}
+
+
+.hot {
+   background-color:#E74C3C;
 }
