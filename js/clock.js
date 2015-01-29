@@ -23,7 +23,6 @@ var getTemp = function() {
    navigator.geolocation.getCurrentPosition(function (position) {
       x = position.coords.latitude;
       y = position.coords.longitude;
-      alert("lat: "+x+", long: "+y);
    });
 
    //var forecastAPI = "https://api.forecast.io/forecast/cd61886aa4701a18e8cb0263548ceb2e/35.300399,-120.662362?callback=?";
