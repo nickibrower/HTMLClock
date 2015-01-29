@@ -25,8 +25,8 @@ var getTemp = function() {
       y = position.coords.longitude;
    });
 
-   //var forecastAPI = "https://api.forecast.io/forecast/cd61886aa4701a18e8cb0263548ceb2e/35.300399,-120.662362?callback=?";
-   var forecastAPI = "https://api.forecast.io/forecast/cd61886aa4701a18e8cb0263548ceb2e/" + x + "," + y + "-120.662362?callback=?";
+   var forecastAPI = "https://api.forecast.io/forecast/cd61886aa4701a18e8cb0263548ceb2e/35.300399,-120.662362?callback=?";
+   //var forecastAPI = "https://api.forecast.io/forecast/cd61886aa4701a18e8cb0263548ceb2e/" + x + "," + y + "?callback=?";
    var success = function (result) {
       $("#forecastLabel").html(result.daily.summary);
       $("#forecastIcon").attr("src", "./img/"+result.currently.icon+".png");
