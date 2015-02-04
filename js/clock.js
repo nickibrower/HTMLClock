@@ -48,5 +48,37 @@ var getTemp = function() {
    $.getJSON(forecastAPI, success);
 };
 
+var showAlarmPopup = function() {
+   document.getElementById("mask").removeAttribute("class");
+   document.getElementById("popup").removeAttribute("class");
+};
+
+var hideAlarmPopup = function() {
+   document.getElementById("mask").setAttribute("class", "hide");
+   document.getElementById("popup").setAttribute("class", "hide");
+};
+
+var insertAlarm = function(hours, mins, ampm, alarmName) {
+   var $div = $("<div>", {class: "flexbile"});
+   var $name = $("<div>", {class: "name"});
+   var $time = $("<div>", {class: "time"});
+   $name.html(alarmName);
+   $time.html(hours+":"+mins+ampm);
+
+   $div.append($name);
+   $div.append($time);
+   $("#alarms").append($div);
+};
+
+var addAlarm = function() {
+   var hours = $("#hours option:selected").text();
+   var mins = $("#mins option:selected").text();
+   var ampm = $("#ampm option:selected").text();
+   var alarmName = document.getElementById("alarmName").value;
+
+   insertAlarm(hours, mins, ampm, alarmName);
+   hideAlarmPopup();
+};
+
 getTime();
 getTemp();
