@@ -1,4 +1,4 @@
-h2 {
+2 {
    color:#777;
    margin-top:0px;
 }
@@ -75,6 +75,35 @@ h2 {
    margin:0px 10px;
 }
 #popup #alarmName {
+   width:90%;
+   font-size:14px;
+   margin:10px auto 25px auto;
+}
+
+/********** The white popup container when deleting an alarm clock *********/
+#deletePopup {
+   position:absolute;
+   top:45%;
+   left:0;
+   right:0;
+   margin-left:auto;
+   margin-right:auto;
+   width:250px;
+   z-index:1;
+   background-color:white;
+   border:1px solid #ccc;
+   border-radius:5px;
+   padding:20px;
+}
+#deletePopup h2 {
+   width:100%;
+   text-align:left;
+   border-bottom:1px solid #ccc;
+}
+#deletePopup .button {
+   margin:0px 10px;
+}
+#deletePopup #activeAlarms {
    width:90%;
    font-size:14px;
    margin:10px auto 25px auto;

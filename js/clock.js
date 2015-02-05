@@ -17,16 +17,8 @@ var getTime = function() {
 };
 
 var getTemp = function() {
-   var x;
-   var y;
-
-   navigator.geolocation.getCurrentPosition(function (position) {
-      x = position.coords.latitude;
-      y = position.coords.longitude;
-   });
-
    var forecastAPI = "https://api.forecast.io/forecast/cd61886aa4701a18e8cb0263548ceb2e/35.300399,-120.662362?callback=?";
-   //var forecastAPI = "https://api.forecast.io/forecast/cd61886aa4701a18e8cb0263548ceb2e/" + x + "," + y + "?callback=?";
+
    var success = function (result) {
       $("#forecastLabel").html(result.daily.summary);
       $("#forecastIcon").attr("src", "./img/"+result.currently.icon+".png");
@@ -48,6 +40,30 @@ var getTemp = function() {
    $.getJSON(forecastAPI, success);
 };
 
+var showDeleteAlarmPopup = function() {
+   $("#activeAlarms").remove();
+   var select = $("<select/>", {id: "activeAlarms"});
+   var AlarmObject = Parse.Object.extend("Alarm");
+   var query = new Parse.Query(AlarmObject);
+   query.find({
+      success: function(results) {
+         for (var i = 0; i < results.length; i++) { 
+            var choice = results[i].get("alarmName") + " ~ " + results[i].get("hours") + ":" + results[i].get("mins") + results[i].get("ampm");
+            select.append($("<option/>").attr("value", choice).text(choice));
+         }
+      }
+   });
+
+   $("#deleteTimeContainer").append(select);
+   document.getElementById("mask").removeAttribute("class");
+   document.getElementById("deletePopup").removeAttribute("class");
+};
+
+var hideDeleteAlarmPopup = function() {
+   document.getElementById("mask").setAttribute("class", "hide");
+   document.getElementById("deletePopup").setAttribute("class", "hide");
+};
+
 var showAlarmPopup = function() {
    document.getElementById("mask").removeAttribute("class");
    document.getElementById("popup").removeAttribute("class");
@@ -58,10 +74,36 @@ var hideAlarmPopup = function() {
    document.getElementById("popup").setAttribute("class", "hide");
 };
 
+var deleteAlarm = function() {
+   var alarm = $("#activeAlarms option:selected").text();
+   var text = alarm.split(" ~ ");
+
+   var AlarmObject = Parse.Object.extend("Alarm");
+   var query = new Parse.Query(AlarmObject);
+   query.find({
+      success: function(results) {
+         for (var i = 0; i < results.length; i++) { 
+            var time = results[i].get("hours") + ":" + results[i].get("mins") + results[i].get("ampm");
+            if (results[i].get("alarmName") == text[0] && time == text[1]) {
+               results[i].destroy({
+                  success: function(myObject) {
+                     document.getElementById("mask").setAttribute("class", "hide");
+                     document.getElementById("deletePopup").setAttribute("class", "hide");
+                     $("#alarms").empty();
+                     getAllAlarms();
+                  }
+               });
+            }
+         }
+      }
+   });
+};
+
 var insertAlarm = function(hours, mins, ampm, alarmName) {
-   var $div = $("<div>", {class: "flexbile"});
-   var $name = $("<div>", {class: "name"});
-   var $time = $("<div>", {class: "time"});
+   var $div = $("<div>", {id: alarmName+hours+":"+mins+ampm, class: "flexbale"});
+   var $name = $("<div>", {class: "name", style: "float: left"});
+   var $time = $("<div>", {class: "time", style: "text-align: right"});
+
    $name.html(alarmName);
    $time.html(hours+":"+mins+ampm);
 
@@ -75,10 +117,31 @@ var addAlarm = function() {
    var mins = $("#mins option:selected").text();
    var ampm = $("#ampm option:selected").text();
    var alarmName = document.getElementById("alarmName").value;
+   
+   var AlarmObject = Parse.Object.extend("Alarm");
+   var alarmObject = new AlarmObject();
+      alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
+      success: function(object) {
+         insertAlarm(hours, mins, ampm, alarmName);
+         hideAlarmPopup();
+      }
+   });
+};
 
-   insertAlarm(hours, mins, ampm, alarmName);
-   hideAlarmPopup();
+var getAllAlarms = function() {
+   Parse.initialize("xFkjAjEU65r4hUuwYprtB8dpSPeoiy94Qo5H4JQJ", "MFw6AhlRdhAPkbXUj0QPUgtay0QSBiy2Lajc9lhR");
+
+   var AlarmObject = Parse.Object.extend("Alarm");
+   var query = new Parse.Query(AlarmObject);
+   query.find({
+      success: function(results) {
+         for (var i = 0; i < results.length; i++) { 
+            insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName")); 
+         }
+      }
+   });
 };
 
 getTime();
 getTemp();
+getAllAlarms();
