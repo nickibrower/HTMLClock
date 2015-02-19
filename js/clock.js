@@ -154,9 +154,9 @@ function signinCallback(authResult) {
             userId = resp.id;
             $("#alarmHeader h2 #headerText").text(resp.displayName + "'s Alarms");
             document.getElementById('signinButton').setAttribute('style', 'display: none');
-            document.getElementById('signOut').setAttribute('style', 'display: block, float: right');
+            document.getElementById('signOut').setAttribute('style', 'display: block');
             document.getElementById('addAlarms').setAttribute('style', 'display: block');
-            document.getElementById('delAlarms').setAttribute('style', 'display: block, float: left');
+            document.getElementById('delAlarms').setAttribute('style', 'display: block');
             getAllAlarms(resp.id);
          });
       });
