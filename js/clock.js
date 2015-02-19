@@ -147,8 +147,8 @@ var userID;
 function signinCallback(authResult) {
    if (authResult['status']['signed_in']) {
       userID = authResult['id_token'];
-      gapi.client.plus.people().get("me").execute(function(resp) {
-         alert("hey " + resp.getDisplayName());
+      gapi.client.plus.people.get({'userId':'me'}).execute(function(resp) {
+         alert("hey " + resp.displayName);
       });
       //$('#alarmHeader').update(mePerson.getDisplayName()+" 's Alarms");
       document.getElementById('signinButton').setAttribute('style', 'display: none');
