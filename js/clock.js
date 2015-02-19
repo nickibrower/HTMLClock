@@ -163,6 +163,7 @@ function signinCallback(authResult) {
             document.getElementById('signOut').setAttribute('style', 'display: block');
             document.getElementById('addAlarms').setAttribute('style', 'display: block');
             document.getElementById('delAlarms').setAttribute('style', 'display: block');
+            getAllAlarms();
          });
       });
    } else {
