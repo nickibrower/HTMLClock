@@ -143,14 +143,13 @@ var getAllAlarms = function() {
 };
 
 var userID;
-var resultStatus;
 
 function signinCallback(authResult) {
    if (authResult['status']['signed_in']) {
       userID = authResult['id_token'];
-      resultStatus = authResult['status'];
-      //Person mePerson = plus.people().get("me").execute();
-      //alert("hey " + mePerson.getDisplayName());
+      gapi.client.plus.people().get("me").execute(function(resp) {
+         alert("hey " + resp.getDisplayName());
+      });
       //$('#alarmHeader').update(mePerson.getDisplayName()+" 's Alarms");
       document.getElementById('signinButton').setAttribute('style', 'display: none');
    } else {
@@ -161,12 +160,8 @@ function signinCallback(authResult) {
       //   "immediate_failed" - Could not automatically log in the user
       console.log('Sign-in state: ' + authResult['error']);
    }
-   getStatus();
 }
 
-function getStatus() {
-   alert(resultStatus);
-}
 
 getTime();
 getTemp();
