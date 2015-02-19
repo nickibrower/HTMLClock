@@ -145,6 +145,7 @@ var getAllAlarms = function() {
 var userID;
 
 function signinCallback(authResult) {
+   console.log("hey");
    if (authResult['status']['signed_in']) {
       userID = authResult['id_token'];
       gapi.client.plus.people.get({'userId':userID}).execute(function(resp) {
