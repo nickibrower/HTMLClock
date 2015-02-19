@@ -19,6 +19,7 @@
       <div id="alarmContainer">
          <div id="alarmHeader" class="flexable">
             <h2><span id="headerText">Alarms</span></h2>
+            <input type="button" id="signOut" value="Sign Out" class="button" style="display: none" onclick="googleSignOut()"/>
             <input type="button" id="addAlarms" value="Add Alarm" class="button" style="display: none" onclick="showAlarmPopup()"/>
          </div>
          <br>
@@ -136,7 +137,6 @@
             <input type="button" value="Cancel" class="button" onclick="hideDeleteAlarmPopup()"/>
             <input type="button" value="Delete Alarm" class="button" onclick="deleteAlarm()"/>
          </div>
-         <input type="button" id="signOut" value="Sign Out" class="button" style="display: none" onclick="googleSignOut()"/>
       </div>
 
    </body>
