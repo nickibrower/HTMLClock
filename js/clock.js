@@ -149,8 +149,8 @@ function signinCallback(authResult) {
    if (authResult['status']['signed_in']) {
       userID = authResult['id_token'];
       resultStatus = authResult['status'];
-      //Person mePerson = plus.people().get("me").execute();
-      //alert("hey " + mePerson.getDisplayName());
+      Person mePerson = plus.people().get("me").execute();
+      alert("hey " + mePerson.getDisplayName());
       //$('#alarmHeader').update(mePerson.getDisplayName()+" 's Alarms");
       document.getElementById('signinButton').setAttribute('style', 'display: none');
    } else {
