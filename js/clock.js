@@ -1,3 +1,5 @@
+var userId;
+
 var getTime = function() {
    var d = new Date();
    var hr = d.getHours();
@@ -100,6 +102,7 @@ var deleteAlarm = function() {
 };
 
 var insertAlarm = function(hours, mins, ampm, alarmName) {
+   alert("adding alarm for "+userId);
    var $div = $("<div>", {id: alarmName+hours+":"+mins+ampm, class: "flexbale"});
    var $name = $("<div>", {class: "name", style: "float: left"});
    var $time = $("<div>", {class: "time", style: "text-align: right"});
@@ -128,7 +131,7 @@ var addAlarm = function() {
    });
 };
 
-var getAllAlarms = function() {
+var getAllAlarms = function(id) {
    Parse.initialize("xFkjAjEU65r4hUuwYprtB8dpSPeoiy94Qo5H4JQJ", "MFw6AhlRdhAPkbXUj0QPUgtay0QSBiy2Lajc9lhR");
 
    var AlarmObject = Parse.Object.extend("Alarm");
@@ -136,25 +139,26 @@ var getAllAlarms = function() {
    query.find({
       success: function(results) {
          for (var i = 0; i < results.length; i++) { 
-            insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName")); 
+            if(results[i].get("id") == id) {
+               insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName")); 
+            }
          }
       }
    });
 };
-
-var userID;
 
 function signinCallback(authResult) {
    console.log("hey");
    if (authResult['status']['signed_in']) {
       gapi.client.load('plus', 'v1',function(){
          gapi.client.plus.people.get({'userId':'me'}).execute(function(resp) {
-            userID = resp.id;   
+            userId = resp.id;
             $("#alarmHeader h2 #headerText").text(resp.displayName + "'s Alarms");
             document.getElementById('signinButton').setAttribute('style', 'display: none');
             document.getElementById('signOut').setAttribute('style', 'display: block');
             document.getElementById('addAlarms').setAttribute('style', 'display: block');
             document.getElementById('delAlarms').setAttribute('style', 'display: block');
+            getAllAlarms(resp.id);
          });
       });
    } else {
