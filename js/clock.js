@@ -150,8 +150,10 @@ function signinCallback(authResult) {
       gapi.client.load('plus', 'v1',function(){
          userID = authResult['id_token'];
          gapi.client.plus.people.get({'userId':'me'}).execute(function(resp) {
-            document.getElementById('alarmHeader').innerHTML = resp.displayName + "'s Alarms";
+            
+            $("#alarmHeader h2 #headerText").text(resp.displayName + "'s Alarms");
             document.getElementById('signinButton').setAttribute('style', 'display: none');
+            document.getElementById('addAlarms').setAttribute('style', 'display: block');
             document.getElementById('deleteAlarms').setAttribute('style', 'display: block');
          });
       });

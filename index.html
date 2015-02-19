@@ -18,8 +18,10 @@
       <img id="forecastIcon">
       <div id="alarmContainer">
          <div id="alarmHeader" class="flexable">
-            <h2>Alarms</h2>
-            <input type="button" value="Add Alarm" class="button" style="display: none" onclick="showAlarmPopup()"/>
+            <h2><span id="headerText">Alarms</span></h2>
+            <div id="addAlarms">
+               <input type="button" value="Add Alarm" class="button" style="display: none" onclick="showAlarmPopup()"/>
+            </div>
          </div>
          <br>
          <span id="signinButton">
