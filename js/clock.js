@@ -147,11 +147,13 @@ var userID;
 function signinCallback(authResult) {
    console.log("hey");
    if (authResult['status']['signed_in']) {
-      userID = authResult['id_token'];
-      gapi.client.plus.people.get({'userId':userID}).execute(function(resp) {
-         console.log("hey " + resp.displayName);
-         document.getElementById('signinButton').setAttribute('style', 'display: none');
-         document.getElementById('deleteAlarms').setAttribute('style', 'display: block');
+      gapi.client.load('plus', 'v1',function(){
+         userID = authResult['id_token'];
+         gapi.client.plus.people.get({'userId':'me'}).execute(function(resp) {
+            console.log("hey " + resp.displayName);
+            document.getElementById('signinButton').setAttribute('style', 'display: none');
+            document.getElementById('deleteAlarms').setAttribute('style', 'display: block');
+         });
       });
    } else {
       // Update the app to reflect a signed out user
