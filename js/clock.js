@@ -124,16 +124,17 @@ var addAlarm = function() {
 
    var AlarmObject = Parse.Object.extend("Alarm");
    var alarmObject = new AlarmObject();
-      alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
+      alarmObject.save({"id": userId, "hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
       success: function(object) {
          insertAlarm(hours, mins, ampm, alarmName);
          hideAlarmPopup();
          $("#alarmName").text("");
+         console.log("added alarm for " + userId);
       }
    });
 };
 
-var getAllAlarms = function(id) {
+var getAllAlarms = function() {
    Parse.initialize("xFkjAjEU65r4hUuwYprtB8dpSPeoiy94Qo5H4JQJ", "MFw6AhlRdhAPkbXUj0QPUgtay0QSBiy2Lajc9lhR");
 
    var AlarmObject = Parse.Object.extend("Alarm");
@@ -141,8 +142,11 @@ var getAllAlarms = function(id) {
    query.find({
       success: function(results) {
          for (var i = 0; i < results.length; i++) { 
-            if(results[i].get("id") == id) {
+            if(results[i].get("id") == userId) {
                insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName")); 
+               console.log("yep got " + results[i].get("alarmName"));
+            } else {
+               console.log("nope results[i].get(\"id\") is " + results[i].get("id") + " while userId is " + userId);
             }
          }
       }
@@ -159,7 +163,6 @@ function signinCallback(authResult) {
             document.getElementById('signOut').setAttribute('style', 'display: block');
             document.getElementById('addAlarms').setAttribute('style', 'display: block');
             document.getElementById('delAlarms').setAttribute('style', 'display: block');
-            getAllAlarms(resp.id);
          });
       });
    } else {
