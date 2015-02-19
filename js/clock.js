@@ -50,8 +50,10 @@ var showDeleteAlarmPopup = function() {
    query.find({
       success: function(results) {
          for (var i = 0; i < results.length; i++) { 
-            var choice = results[i].get("alarmName") + " ~ " + results[i].get("hours") + ":" + results[i].get("mins") + results[i].get("ampm");
-            select.append($("<option/>").attr("value", choice).text(choice));
+            if (results[i].get("userId") == userId) {
+               var choice = results[i].get("alarmName") + " ~ " + results[i].get("hours") + ":" + results[i].get("mins") + results[i].get("ampm");
+               select.append($("<option/>").attr("value", choice).text(choice));
+            }
          }
       }
    });
@@ -86,7 +88,7 @@ var deleteAlarm = function() {
       success: function(results) {
          for (var i = 0; i < results.length; i++) { 
             var time = results[i].get("hours") + ":" + results[i].get("mins") + results[i].get("ampm");
-            //if (results[i].get("userId") == userId && results[i].get("alarmName") == text[0] && time == text[1]) {
+            if (results[i].get("userId") == userId && results[i].get("alarmName") == text[0] && time == text[1]) {
                results[i].destroy({
                   success: function(myObject) {
                      document.getElementById("mask").setAttribute("class", "hide");
@@ -95,7 +97,7 @@ var deleteAlarm = function() {
                      getAllAlarms();
                   }
                });
-           // }
+            }
          }
       }
    });
