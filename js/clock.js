@@ -150,7 +150,7 @@ function signinCallback(authResult) {
       userID = authResult['id_token'];
       resultStatus = authResult['status'];
       //Person mePerson = plus.people().get("me").execute();
-      alert("hey " + mePerson.getDisplayName());
+      //alert("hey " + mePerson.getDisplayName());
       //$('#alarmHeader').update(mePerson.getDisplayName()+" 's Alarms");
       document.getElementById('signinButton').setAttribute('style', 'display: none');
    } else {
