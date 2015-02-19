@@ -128,6 +128,7 @@ var addAlarm = function() {
       success: function(object) {
          insertAlarm(hours, mins, ampm, alarmName);
          hideAlarmPopup();
+         $("#alarmName").text("");
       }
    });
 };
@@ -175,10 +176,10 @@ function googleSignOut() {
    gapi.auth.signOut();
    $("#alarmHeader h2 #headerText").text("Alarms");
    document.getElementById('signinButton').setAttribute('style', 'display: block');
-   //document.getElementById('signOut').setAttribute('style', 'display: none');
+   document.getElementById('signOut').setAttribute('style', 'display: none');
    document.getElementById('addAlarms').setAttribute('style', 'display: none');
+   document.getElementById('delAlarms').setAttribute('style', 'display: none');
    $("#alarms").empty();//children().hide();
-   //document.getElementById('delAlarms').setAttribute('style', 'display: none');
 }
 
 
