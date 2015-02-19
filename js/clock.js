@@ -86,7 +86,7 @@ var deleteAlarm = function() {
       success: function(results) {
          for (var i = 0; i < results.length; i++) { 
             var time = results[i].get("hours") + ":" + results[i].get("mins") + results[i].get("ampm");
-            if (results[i].get("alarmName") == text[0] && time == text[1]) {
+            if (results[i].get("id") == userId && results[i].get("alarmName") == text[0] && time == text[1]) {
                results[i].destroy({
                   success: function(myObject) {
                      document.getElementById("mask").setAttribute("class", "hide");
@@ -102,7 +102,6 @@ var deleteAlarm = function() {
 };
 
 var insertAlarm = function(hours, mins, ampm, alarmName) {
-   alert("adding alarm for "+userId);
    var $div = $("<div>", {id: alarmName+hours+":"+mins+ampm, class: "flexbale"});
    var $name = $("<div>", {class: "name", style: "float: left"});
    var $time = $("<div>", {class: "time", style: "text-align: right"});
@@ -123,7 +122,7 @@ var addAlarm = function() {
    
    var AlarmObject = Parse.Object.extend("Alarm");
    var alarmObject = new AlarmObject();
-      alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
+      alarmObject.save({"id": userId, "hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
       success: function(object) {
          insertAlarm(hours, mins, ampm, alarmName);
          hideAlarmPopup();
@@ -183,4 +182,3 @@ function googleSignOut() {
 
 getTime();
 getTemp();
-//getAllAlarms();
