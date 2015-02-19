@@ -173,7 +173,7 @@ function signinCallback(authResult) {
 
 function googleSignOut() {
    gapi.auth.signOut();
-   $("#alarmHeader h2 #headerText").text(resp.displayName + "'s Alarms");
+   $("#alarmHeader h2 #headerText").text("Alarms");
    document.getElementById('signinButton').setAttribute('style', 'display: block');
    document.getElementById('signOut').setAttribute('style', 'display: none');
    document.getElementById('addAlarms').setAttribute('style', 'display: none');
