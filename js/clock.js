@@ -147,9 +147,9 @@ var userID;
 function signinCallback(authResult) {
    if (authResult['status']['signed_in']) {
       userID = authResult['id_token'];
-      //Person mePerson = plus.people().get("me").execute();
-      //alert("hey "+mePerson.getDisplayName());
-      //$('#alarmHeader').update(mePerson.getDisplayName()+" 's Alarms");
+      Person mePerson = plus.people().get("me").execute();
+      alert("hey "+mePerson.getDisplayName());
+      $('#alarmHeader').update(mePerson.getDisplayName()+" 's Alarms");
       document.getElementById('signinButton').setAttribute('style', 'display: none');
    } else {
       // Update the app to reflect a signed out user
