@@ -148,11 +148,11 @@ function signinCallback(authResult) {
    console.log("hey");
    if (authResult['status']['signed_in']) {
       gapi.client.load('plus', 'v1',function(){
-         userID = authResult['id_token'];
          gapi.client.plus.people.get({'userId':'me'}).execute(function(resp) {
-            
+            userID = resp.id;   
             $("#alarmHeader h2 #headerText").text(resp.displayName + "'s Alarms");
             document.getElementById('signinButton').setAttribute('style', 'display: none');
+            document.getElementById('signOut').setAttribute('style', 'display: none');
             document.getElementById('addAlarms').setAttribute('style', 'display: block');
             document.getElementById('delAlarms').setAttribute('style', 'display: block');
          });
@@ -165,6 +165,15 @@ function signinCallback(authResult) {
       //   "immediate_failed" - Could not automatically log in the user
       console.log('Sign-in state: ' + authResult['error']);
    }
+}
+
+function googleSignOut() {
+   gapi.auth.signOut();
+   $("#alarmHeader h2 #headerText").text(resp.displayName + "'s Alarms");
+   document.getElementById('signinButton').setAttribute('style', 'display: block');
+   document.getElementById('signOut').setAttribute('style', 'display: none');
+   document.getElementById('addAlarms').setAttribute('style', 'display: none');
+   document.getElementById('delAlarms').setAttribute('style', 'display: none');
 }
 
 
