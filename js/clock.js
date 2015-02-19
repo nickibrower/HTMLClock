@@ -154,7 +154,7 @@ function signinCallback(authResult) {
             $("#alarmHeader h2 #headerText").text(resp.displayName + "'s Alarms");
             document.getElementById('signinButton').setAttribute('style', 'display: none');
             document.getElementById('addAlarms').setAttribute('style', 'display: block');
-            document.getElementById('deleteAlarms').setAttribute('style', 'display: block');
+            document.getElementById('delAlarms').setAttribute('style', 'display: block');
          });
       });
    } else {
