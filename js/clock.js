@@ -142,20 +142,23 @@ var getAllAlarms = function() {
    });
 };
 
+var userID;
+
 function signinCallback(authResult) {
-   alert("hey there just calling you back ;)");
-  if (authResult['status']['signed_in']) {
-    // Update the app to reflect a signed in user
-    // Hide the sign-in button now that the user is authorized, for example:
-    document.getElementById('signinButton').setAttribute('style', 'display: none');
-  } else {
-    // Update the app to reflect a signed out user
-    // Possible error values:
-    //   "user_signed_out" - User is signed-out
-    //   "access_denied" - User denied access to your app
-    //   "immediate_failed" - Could not automatically log in the user
-    console.log('Sign-in state: ' + authResult['error']);
-  }
+   if (authResult['status']['signed_in']) {
+      userID = authResult['id_token'];
+      Person mePerson = plus.people().get("me").execute();
+      document.getElementById('alarmHeader').(mePerson.getDisplayName()+" 's Alarms");
+      System.out.println("Display Name:\t" + mePerson.getDisplayName());
+      document.getElementById('signinButton').setAttribute('style', 'display: none');
+   } else {
+      // Update the app to reflect a signed out user
+      // Possible error values:
+      //   "user_signed_out" - User is signed-out
+      //   "access_denied" - User denied access to your app
+      //   "immediate_failed" - Could not automatically log in the user
+      console.log('Sign-in state: ' + authResult['error']);
+   }
 }
 
 getTime();
