@@ -94,8 +94,8 @@ var deleteAlarm = function() {
                      $("#alarms").empty();
                      getAllAlarms();
                   }
-              // });
-            }
+               });
+           // }
          }
       }
    });
