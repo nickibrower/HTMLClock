@@ -155,9 +155,10 @@ function signinCallback(authResult) {
             userId = resp.id;
             $("#alarmHeader h2 #headerText").text(resp.displayName + "'s Alarms");
             document.getElementById('signinButton').setAttribute('style', 'display: none');
-            document.getElementById('signOut').setAttribute('style', 'display: block');
+            //document.getElementById('signOut').setAttribute('style', 'display: block');
             document.getElementById('addAlarms').setAttribute('style', 'display: block');
-            document.getElementById('delAlarms').setAttribute('style', 'display: block');
+            document.getElementById('alarms').setAttribute('style', 'display: block');
+            //document.getElementById('delAlarms').setAttribute('style', 'display: block');
             getAllAlarms(resp.id);
          });
       });
@@ -175,9 +176,10 @@ function googleSignOut() {
    gapi.auth.signOut();
    $("#alarmHeader h2 #headerText").text("Alarms");
    document.getElementById('signinButton').setAttribute('style', 'display: block');
-   document.getElementById('signOut').setAttribute('style', 'display: none');
+   //document.getElementById('signOut').setAttribute('style', 'display: none');
    document.getElementById('addAlarms').setAttribute('style', 'display: none');
-   document.getElementById('delAlarms').setAttribute('style', 'display: none');
+   $("#alarms").empty();//children().hide();
+   //document.getElementById('delAlarms').setAttribute('style', 'display: none');
 }
 
 
