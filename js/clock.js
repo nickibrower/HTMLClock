@@ -86,7 +86,7 @@ var deleteAlarm = function() {
       success: function(results) {
          for (var i = 0; i < results.length; i++) { 
             var time = results[i].get("hours") + ":" + results[i].get("mins") + results[i].get("ampm");
-            if (results[i].get("id") == userId && results[i].get("alarmName") == text[0] && time == text[1]) {
+            if (results[i].get("userId") == userId && results[i].get("alarmName") == text[0] && time == text[1]) {
                results[i].destroy({
                   success: function(myObject) {
                      document.getElementById("mask").setAttribute("class", "hide");
@@ -124,7 +124,7 @@ var addAlarm = function() {
 
    var AlarmObject = Parse.Object.extend("Alarm");
    var alarmObject = new AlarmObject();
-      alarmObject.save({"id": userId, "hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
+      alarmObject.save({"userId": userId, "hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
       success: function(object) {
          insertAlarm(hours, mins, ampm, alarmName);
          hideAlarmPopup();
@@ -142,7 +142,7 @@ var getAllAlarms = function() {
    query.find({
       success: function(results) {
          for (var i = 0; i < results.length; i++) { 
-            if(results[i].get("id") == userId) {
+            if(results[i].get("userId") == userId) {
                insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName")); 
                console.log("yep got " + results[i].get("alarmName"));
             } else {
