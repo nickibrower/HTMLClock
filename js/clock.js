@@ -156,7 +156,7 @@ function signinCallback(authResult) {
             document.getElementById('signinButton').setAttribute('style', 'display: none');
             document.getElementById('signOut').setAttribute('style', 'display: block, float: right');
             document.getElementById('addAlarms').setAttribute('style', 'display: block');
-            document.getElementById('delAlarms').setAttribute('style', 'display: block, position: fixed');
+            document.getElementById('delAlarms').setAttribute('style', 'display: block, float: left');
             getAllAlarms(resp.id);
          });
       });
