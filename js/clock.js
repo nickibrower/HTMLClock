@@ -149,7 +149,7 @@ function signinCallback(authResult) {
       userID = authResult['id_token'];
       Person mePerson = plus.people().get("me").execute();
       alert("hey "+mePerson.getDisplayName());
-      $('#alarmHeader').update(mePerson.getDisplayName()+" 's Alarms");
+      //$('#alarmHeader').update(mePerson.getDisplayName()+" 's Alarms");
       document.getElementById('signinButton').setAttribute('style', 'display: none');
    } else {
       // Update the app to reflect a signed out user
