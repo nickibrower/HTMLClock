@@ -22,20 +22,21 @@
             <input type="button" value="Add Alarm" class="button" style="display: none" onclick="showAlarmPopup()"/>
          </div>
          <br>
-      <span id="signinButton">
-         <span
-            class="g-signin"
-            data-callback="signinCallback"
-            data-clientid="1068386691215-tcvp9gug6tcuph3ibh929b27j1rvflnh.apps.googleusercontent.com"
-            data-cookiepolicy="single_host_origin"
-            data-requestvisibleactions="http://schema.org/AddAction"
-            data-scope="https://www.googleapis.com/auth/plus.login">
+         <span id="signinButton">
+            <span
+               class="g-signin"
+               data-callback="signinCallback"
+               data-clientid="1068386691215-tcvp9gug6tcuph3ibh929b27j1rvflnh.apps.googleusercontent.com"
+               data-cookiepolicy="single_host_origin"
+               data-requestvisibleactions="http://schema.org/AddAction"
+               data-scope="https://www.googleapis.com/auth/plus.login">
+            </span>
          </span>
-      </span>
          <div id="alarms"></div>
-         <div id="deleteAlarms" class="flexable">
-            <input type="button" value="Delete Alarms" class="button" style="display: none"  onclick="showDeleteAlarmPopup()"/>
-         </div>      </div>
+            <div id="deleteAlarms" class="flexable">
+               <input type="button" value="Delete Alarms" class="button" style="display: none"  onclick="showDeleteAlarmPopup()"/>
+            </div>      
+         </div>
       <div id="mask" class="hide"></div>
       <div id="popup" class="hide">
          <h1>Add Alarm</h1>

@@ -148,11 +148,10 @@ function signinCallback(authResult) {
    if (authResult['status']['signed_in']) {
       userID = authResult['id_token'];
       gapi.client.plus.people.get({'userId':'me'}).execute(function(resp) {
-         alert("hey " + resp.displayName);
+         console.log("hey " + resp.displayName);
          document.getElementById('signinButton').setAttribute('style', 'display: none');
          document.getElementById('deleteAlarms').setAttribute('style', 'display: block');
       });
-      //$('#alarmHeader').update(mePerson.getDisplayName()+" 's Alarms");
    } else {
       // Update the app to reflect a signed out user
       // Possible error values:
