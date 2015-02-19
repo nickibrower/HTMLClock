@@ -120,6 +120,8 @@ var addAlarm = function() {
    var ampm = $("#ampm option:selected").text();
    var alarmName = document.getElementById("alarmName").value;
    
+   console.log("adding alarm");
+
    var AlarmObject = Parse.Object.extend("Alarm");
    var alarmObject = new AlarmObject();
       alarmObject.save({"id": userId, "hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
@@ -147,7 +149,6 @@ var getAllAlarms = function(id) {
 };
 
 function signinCallback(authResult) {
-   console.log("hey");
    if (authResult['status']['signed_in']) {
       gapi.client.load('plus', 'v1',function(){
          gapi.client.plus.people.get({'userId':'me'}).execute(function(resp) {
