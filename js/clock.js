@@ -147,7 +147,7 @@ var userID;
 function signinCallback(authResult) {
    if (authResult['status']['signed_in']) {
       userID = authResult['id_token'];
-      gapi.client.plus.people.get({'userId':'me'}).execute(function(resp) {
+      gapi.client.plus.people.get({'userId':userID}).execute(function(resp) {
          console.log("hey " + resp.displayName);
          document.getElementById('signinButton').setAttribute('style', 'display: none');
          document.getElementById('deleteAlarms').setAttribute('style', 'display: block');
