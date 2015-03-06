@@ -5,11 +5,6 @@
       <title>Nicki's clock</title>
       <link href="css/clock.css" rel="stylesheet" type="text/css">
       <link href="css/alarm.css" rel="stylesheet" type="text/css">
-      <script>
-         window.onload = function() {
-            imgurInit({"client_id":"16c8e08fadfd7fd", "type":"token", "callback_function":"imgur_cb"});
-         }
-      </script>
    </head>
 
    <body>
@@ -164,5 +159,8 @@
       ga('send', 'event', 'Alarm', 'Delete');
    </script>
    <script src="lib/oauth.js"></script>
+   <script type="text/javascript">
+      imgurInit({client_id:"16c8e08fadfd7fd", type:"token", callback_function:"imgur_cb"});      
+   </script>
    <script src="js/clock.js"></script>
 </html>
